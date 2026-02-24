@@ -1,443 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Swaroop Kumar Palai | Quantum Photonics Researcher</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     :root {
-      --bg: #0a0e1a;
-      --bg2: #0f1628;
-      --card: #131c35;
-      --card2: #1a2540;
-      --accent: #4f9cf9;
-      --accent2: #7b5ea7;
-      --accent3: #38d9a9;
-      --text: #e2e8f0;
-      --muted: #8892a4;
-      --border: #1e2d4d;
-      --glow: rgba(79,156,249,0.18);
+      --bg:#0a0e1a; --bg2:#0f1628; --card:#131c35; --card2:#1a2540;
+      --accent:#4f9cf9; --accent2:#7b5ea7; --accent3:#38d9a9;
+      --text:#e2e8f0; --muted:#8892a4; --border:#1e2d4d; --glow:rgba(79,156,249,0.18);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;}
+
+    /* PARALLAX PARTICLES */
+    #parallax-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+    .p-dot{position:absolute;border-radius:50%;opacity:0;animation:floatDot linear infinite;}
+    @keyframes floatDot{
+      0%{opacity:0;transform:translateY(0) scale(1);}
+      10%{opacity:1;}
+      90%{opacity:0.5;}
+      100%{opacity:0;transform:translateY(-100vh) scale(0.3);}
     }
 
-    /* ── NAVBAR ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2.5rem;
-      height: 62px;
-      background: rgba(10,14,26,0.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
+    /* NAVBAR */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 2.5rem;height:62px;
+      background:rgba(10,14,26,0.82);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      transition:background 0.3s,box-shadow 0.3s;
     }
-    .nav-logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.05rem;
-      color: var(--accent);
-      letter-spacing: 0.04em;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: var(--muted); text-decoration: none;
-      font-size: 0.88rem; font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
+    nav.scrolled{background:rgba(10,14,26,0.97);box-shadow:0 2px 24px rgba(0,0,0,0.45);}
+    .nav-logo{font-family:'JetBrains Mono',monospace;font-size:1.05rem;color:var(--accent);letter-spacing:0.04em;}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:0.88rem;font-weight:500;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--accent);}
 
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
+    /* HERO */
+    #hero{
+      min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:6rem 2rem 4rem;
+      position:relative;overflow:hidden;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,156,249,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(123,94,167,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 60% at 50% 0%,rgba(79,156,249,0.1) 0%,transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 80%,rgba(123,94,167,0.08) 0%,transparent 60%),
         var(--bg);
-      position: relative;
     }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(79,156,249,0.12);
-      border: 1px solid rgba(79,156,249,0.3);
-      border-radius: 999px;
-      padding: 0.35rem 1.1rem;
-      font-size: 0.82rem;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.05em;
-    }
-    h1.hero-name {
-      font-size: clamp(2.4rem, 6vw, 4.5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      background: linear-gradient(135deg, #e2e8f0 30%, var(--accent) 70%, var(--accent2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.8rem;
-    }
-    .hero-title {
-      font-size: 1.2rem;
-      color: var(--muted);
-      font-weight: 400;
-      margin-bottom: 1.6rem;
-    }
-    .hero-title span { color: var(--accent3); font-weight: 500; }
-    .hero-desc {
-      max-width: 680px;
-      color: #a0aabb;
-      font-size: 1.02rem;
-      margin-bottom: 2.2rem;
-    }
-    .hero-tags {
-      display: flex; flex-wrap: wrap; gap: 0.55rem;
-      justify-content: center; margin-bottom: 2.5rem;
-    }
-    .tag {
-      background: var(--card2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.28rem 0.85rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-    .btn-primary {
-      background: var(--accent);
-      color: #0a0e1a;
-      padding: 0.75rem 2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: opacity 0.2s, transform 0.2s;
-      display: inline-flex; align-items: center; gap: 0.5rem;
-    }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      padding: 0.75rem 2rem;
-      border-radius: 8px;
-      font-weight: 500;
-      text-decoration: none;
-      font-size: 0.95rem;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s, transform 0.2s;
-      display: inline-flex; align-items: center; gap: 0.5rem;
-    }
-    .btn-outline:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .hero-stats {
-      display: flex; gap: 2.5rem; margin-top: 3.5rem;
-      justify-content: center; flex-wrap: wrap;
-    }
-    .stat { text-align: center; }
-    .stat-num {
-      font-size: 2rem; font-weight: 700;
-      color: var(--accent);
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    /* ORBS */
+    .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.11;pointer-events:none;will-change:transform;transition:transform 0.2s cubic-bezier(.25,.46,.45,.94);}
+    .orb1{width:540px;height:540px;background:var(--accent);top:-140px;left:-100px;}
+    .orb2{width:400px;height:400px;background:var(--accent2);bottom:-100px;right:-80px;}
+    .orb3{width:280px;height:280px;background:var(--accent3);top:38%;left:52%;}
 
-    /* ── SECTIONS ── */
-    section {
-      padding: 5rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
+    .hero-inner{position:relative;z-index:1;will-change:transform;}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:0.5rem;
+      background:rgba(79,156,249,0.12);border:1px solid rgba(79,156,249,0.3);
+      border-radius:999px;padding:0.35rem 1.1rem;font-size:0.82rem;color:var(--accent);
+      margin-bottom:1.5rem;letter-spacing:0.05em;
     }
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
+    h1.hero-name{
+      font-size:clamp(2.4rem,6vw,4.5rem);font-weight:700;line-height:1.1;
+      background:linear-gradient(135deg,#e2e8f0 30%,var(--accent) 70%,var(--accent2) 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      margin-bottom:0.8rem;
     }
-    .section-title {
-      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-      font-weight: 700;
-      margin-bottom: 2.5rem;
-      color: var(--text);
-    }
-    .section-title span { color: var(--accent); }
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
-      margin-bottom: 3rem;
-      max-width: 120px;
-    }
+    .hero-title{font-size:1.2rem;color:var(--muted);font-weight:400;margin-bottom:1.6rem;}
+    .hero-title span{color:var(--accent3);font-weight:500;}
+    .hero-desc{max-width:680px;color:#a0aabb;font-size:1.02rem;margin-bottom:2.2rem;}
+    .hero-tags{display:flex;flex-wrap:wrap;gap:0.55rem;justify-content:center;margin-bottom:2.5rem;}
+    .tag{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:0.28rem 0.85rem;font-size:0.78rem;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+    .btn-primary{background:var(--accent);color:#0a0e1a;padding:0.75rem 2rem;border-radius:8px;font-weight:600;text-decoration:none;font-size:0.95rem;transition:opacity 0.2s,transform 0.2s;display:inline-flex;align-items:center;gap:0.5rem;}
+    .btn-primary:hover{opacity:0.88;transform:translateY(-2px);}
+    .btn-outline{background:transparent;color:var(--text);padding:0.75rem 2rem;border-radius:8px;font-weight:500;text-decoration:none;font-size:0.95rem;border:1px solid var(--border);transition:border-color 0.2s,transform 0.2s;display:inline-flex;align-items:center;gap:0.5rem;}
+    .btn-outline:hover{border-color:var(--accent);transform:translateY(-2px);}
+    .hero-stats{display:flex;gap:2.5rem;margin-top:3.5rem;justify-content:center;flex-wrap:wrap;}
+    .stat{text-align:center;}
+    .stat-num{font-size:2rem;font-weight:700;color:var(--accent);font-family:'JetBrains Mono',monospace;}
+    .stat-label{font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
 
-    /* ── ABOUT ── */
-    #about { padding-top: 7rem; }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem; align-items: start;
-    }
-    .about-text p { color: #a0aabb; font-size: 0.98rem; margin-bottom: 1rem; }
-    .info-list { list-style: none; margin-top: 1.5rem; }
-    .info-list li {
-      display: flex; gap: 0.75rem; align-items: flex-start;
-      padding: 0.55rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.9rem;
-    }
-    .info-list li:last-child { border-bottom: none; }
-    .info-list i { color: var(--accent); width: 18px; margin-top: 3px; }
-    .info-label { color: var(--muted); min-width: 90px; }
+    /* SECTIONS */
+    section{padding:5rem 2rem;max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+    .section-label{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem;}
+    .section-title{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:700;margin-bottom:2.5rem;color:var(--text);}
+    .section-title span{color:var(--accent);}
+    .divider{height:1px;background:linear-gradient(90deg,var(--accent) 0%,transparent 100%);margin-bottom:3rem;max-width:120px;}
 
-    /* ── EXPERIENCE TIMELINE ── */
-    .timeline { position: relative; padding-left: 2.5rem; }
-    .timeline::before {
-      content: ''; position: absolute; left: 0.85rem; top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--accent) 0%, var(--accent2) 50%, transparent 100%);
-    }
-    .tl-item { position: relative; margin-bottom: 2.5rem; }
-    .tl-dot {
-      position: absolute; left: -2.05rem; top: 0.35rem;
-      width: 14px; height: 14px;
-      background: var(--accent); border-radius: 50%;
-      border: 2px solid var(--bg);
-      box-shadow: 0 0 10px var(--glow);
-    }
-    .tl-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.4rem 1.6rem;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .tl-card:hover { border-color: var(--accent); transform: translateX(4px); }
-    .tl-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; }
-    .tl-role { font-size: 1.05rem; font-weight: 600; color: var(--text); }
-    .tl-date {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--accent3);
-      background: rgba(56,217,169,0.1);
-      padding: 0.2rem 0.7rem;
-      border-radius: 999px;
-    }
-    .tl-org { color: var(--accent); font-size: 0.9rem; margin: 0.3rem 0 0.8rem; }
-    .tl-desc { color: var(--muted); font-size: 0.88rem; }
+    /* ABOUT */
+    #about{padding-top:7rem;}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+    .about-text p{color:#a0aabb;font-size:0.98rem;margin-bottom:1rem;}
+    .info-list{list-style:none;margin-top:1.5rem;}
+    .info-list li{display:flex;gap:0.75rem;align-items:flex-start;padding:0.55rem 0;border-bottom:1px solid var(--border);font-size:0.9rem;}
+    .info-list li:last-child{border-bottom:none;}
+    .info-list i{color:var(--accent);width:18px;margin-top:3px;}
+    .info-label{color:var(--muted);min-width:90px;}
 
-    /* ── PROJECT CARDS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-    .proj-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.6rem;
-      transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
-      position: relative; overflow: hidden;
-    }
-    .proj-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      opacity: 0; transition: opacity 0.25s;
-    }
-    .proj-card:hover { border-color: rgba(79,156,249,0.4); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
-    .proj-card:hover::before { opacity: 1; }
-    .proj-icon {
-      width: 44px; height: 44px;
-      background: rgba(79,156,249,0.12);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-      color: var(--accent);
-      margin-bottom: 1.1rem;
-    }
-    .proj-title { font-size: 1.0rem; font-weight: 600; margin-bottom: 0.6rem; }
-    .proj-desc { color: var(--muted); font-size: 0.87rem; line-height: 1.6; margin-bottom: 1rem; }
-    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .proj-tag {
-      font-size: 0.73rem;
-      font-family: 'JetBrains Mono', monospace;
-      background: rgba(79,156,249,0.1);
-      color: var(--accent);
-      border: 1px solid rgba(79,156,249,0.2);
-      border-radius: 4px;
-      padding: 0.15rem 0.55rem;
-    }
-    .proj-tag.green {
-      background: rgba(56,217,169,0.1);
-      color: var(--accent3);
-      border-color: rgba(56,217,169,0.2);
-    }
-    .proj-tag.purple {
-      background: rgba(123,94,167,0.12);
-      color: #b39ddb;
-      border-color: rgba(123,94,167,0.25);
-    }
-    .proj-tag.red {
-      background: rgba(249,79,111,0.1);
-      color: #f9a8d4;
-      border-color: rgba(249,79,111,0.2);
-    }
+    /* TIMELINE */
+    .timeline{position:relative;padding-left:2.5rem;}
+    .timeline::before{content:'';position:absolute;left:0.85rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent) 0%,var(--accent2) 50%,transparent 100%);}
+    .tl-item{position:relative;margin-bottom:2.5rem;}
+    .tl-dot{position:absolute;left:-2.05rem;top:0.35rem;width:14px;height:14px;background:var(--accent);border-radius:50%;border:2px solid var(--bg);box-shadow:0 0 10px var(--glow);}
+    .tl-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.6rem;transition:border-color 0.2s,transform 0.2s;}
+    .tl-card:hover{border-color:var(--accent);transform:translateX(4px);}
+    .tl-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;}
+    .tl-role{font-size:1.05rem;font-weight:600;color:var(--text);}
+    .tl-date{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--accent3);background:rgba(56,217,169,0.1);padding:0.2rem 0.7rem;border-radius:999px;}
+    .tl-org{color:var(--accent);font-size:0.9rem;margin:0.3rem 0 0.8rem;}
+    .tl-desc{color:var(--muted);font-size:0.88rem;}
 
-    /* ── PUBLICATIONS ── */
-    .pub-list { display: flex; flex-direction: column; gap: 1rem; }
-    .pub-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.3rem 1.6rem;
-      display: flex; gap: 1.2rem; align-items: flex-start;
-      transition: border-color 0.2s;
-    }
-    .pub-item:hover { border-color: rgba(79,156,249,0.35); }
-    .pub-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--accent);
-      min-width: 28px;
-      font-weight: 600;
-    }
-    .pub-content {}
-    .pub-title { font-size: 0.95rem; font-weight: 500; color: var(--text); margin-bottom: 0.3rem; }
-    .pub-meta { font-size: 0.82rem; color: var(--muted); }
-    .pub-badge {
-      display: inline-block;
-      font-size: 0.7rem;
-      padding: 0.15rem 0.55rem;
-      border-radius: 999px;
-      font-weight: 600;
-      margin-left: 0.5rem;
-    }
-    .badge-pub { background: rgba(56,217,169,0.15); color: var(--accent3); }
-    .badge-sub { background: rgba(249,156,79,0.15); color: #fbbf24; }
-    .badge-prep { background: rgba(123,94,167,0.15); color: #b39ddb; }
+    /* PROJECTS */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;}
+    .proj-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.6rem;transition:border-color 0.25s,transform 0.2s,box-shadow 0.25s;position:relative;overflow:hidden;}
+    .proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:opacity 0.25s;}
+    .proj-card:hover{border-color:rgba(79,156,249,0.4);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+    .proj-card:hover::before{opacity:1;}
+    .proj-icon{width:44px;height:44px;background:rgba(79,156,249,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--accent);margin-bottom:1.1rem;}
+    .proj-title{font-size:1.0rem;font-weight:600;margin-bottom:0.6rem;}
+    .proj-desc{color:var(--muted);font-size:0.87rem;line-height:1.6;margin-bottom:1rem;}
+    .proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+    .proj-tag{font-size:0.73rem;font-family:'JetBrains Mono',monospace;background:rgba(79,156,249,0.1);color:var(--accent);border:1px solid rgba(79,156,249,0.2);border-radius:4px;padding:0.15rem 0.55rem;}
+    .proj-tag.green{background:rgba(56,217,169,0.1);color:var(--accent3);border-color:rgba(56,217,169,0.2);}
+    .proj-tag.purple{background:rgba(123,94,167,0.12);color:#b39ddb;border-color:rgba(123,94,167,0.25);}
+    .proj-tag.red{background:rgba(249,79,111,0.1);color:#f9a8d4;border-color:rgba(249,79,111,0.2);}
 
-    /* ── SKILLS ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.4rem;
-    }
-    .skill-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.4rem;
-    }
-    .skill-card h4 { font-size: 0.88rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
-    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-    .pill {
-      background: var(--card2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.3rem 0.75rem;
-      font-size: 0.8rem;
-      color: var(--text);
-    }
+    /* PUBLICATIONS */
+    .pub-list{display:flex;flex-direction:column;gap:1rem;}
+    .pub-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.6rem;display:flex;gap:1.2rem;align-items:flex-start;transition:border-color 0.2s;}
+    .pub-item:hover{border-color:rgba(79,156,249,0.35);}
+    .pub-num{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--accent);min-width:28px;font-weight:600;}
+    .pub-title{font-size:0.95rem;font-weight:500;color:var(--text);margin-bottom:0.3rem;}
+    .pub-meta{font-size:0.82rem;color:var(--muted);}
+    .pub-badge{display:inline-block;font-size:0.7rem;padding:0.15rem 0.55rem;border-radius:999px;font-weight:600;margin-left:0.5rem;}
+    .badge-pub{background:rgba(56,217,169,0.15);color:var(--accent3);}
+    .badge-sub{background:rgba(249,156,79,0.15);color:#fbbf24;}
+    .badge-prep{background:rgba(123,94,167,0.15);color:#b39ddb;}
 
-    /* ── AWARDS ── */
-    .awards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1rem;
-    }
-    .award-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.1rem 1.3rem;
-      display: flex; align-items: center; gap: 1rem;
-      transition: border-color 0.2s;
-    }
-    .award-item:hover { border-color: rgba(79,156,249,0.35); }
-    .award-icon { color: #fbbf24; font-size: 1.2rem; }
-    .award-text { font-size: 0.88rem; color: var(--text); }
+    /* SKILLS */
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.4rem;}
+    .skill-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.4rem;}
+    .skill-card h4{font-size:0.88rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem;}
+    .skill-pills{display:flex;flex-wrap:wrap;gap:0.45rem;}
+    .pill{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;color:var(--text);}
 
-    /* ── TALKS ── */
-    .talks-list { display: flex; flex-direction: column; gap: 0.75rem; }
-    .talk-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem 1.4rem;
-      display: flex; align-items: center; gap: 1rem;
-      transition: border-color 0.2s;
-    }
-    .talk-item:hover { border-color: rgba(79,156,249,0.3); }
-    .talk-type {
-      font-size: 0.7rem; font-weight: 600;
-      padding: 0.2rem 0.6rem; border-radius: 999px;
-      text-transform: uppercase; letter-spacing: 0.06em; min-width: 60px; text-align: center;
-    }
-    .talk-type.invited { background: rgba(79,156,249,0.15); color: var(--accent); }
-    .talk-type.talk { background: rgba(56,217,169,0.15); color: var(--accent3); }
-    .talk-type.poster { background: rgba(123,94,167,0.15); color: #b39ddb; }
-    .talk-text { font-size: 0.88rem; color: var(--text); flex: 1; }
+    /* AWARDS */
+    .awards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+    .award-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem;display:flex;align-items:center;gap:1rem;transition:border-color 0.2s;}
+    .award-item:hover{border-color:rgba(79,156,249,0.35);}
+    .award-icon{color:#fbbf24;font-size:1.2rem;}
+    .award-text{font-size:0.88rem;color:var(--text);}
 
-    /* ── CONTACT ── */
-    #contact { text-align: center; }
-    .contact-links {
-      display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;
-    }
-    .contact-link {
-      display: flex; align-items: center; gap: 0.55rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.85rem 1.5rem;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-    .contact-link i { font-size: 1.1rem; }
+    /* TALKS */
+    .talks-list{display:flex;flex-direction:column;gap:0.75rem;}
+    .talk-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.4rem;display:flex;align-items:center;gap:1rem;transition:border-color 0.2s;}
+    .talk-item:hover{border-color:rgba(79,156,249,0.3);}
+    .talk-type{font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:999px;text-transform:uppercase;letter-spacing:0.06em;min-width:60px;text-align:center;}
+    .talk-type.invited{background:rgba(79,156,249,0.15);color:var(--accent);}
+    .talk-type.talk{background:rgba(56,217,169,0.15);color:var(--accent3);}
+    .talk-type.poster{background:rgba(123,94,167,0.15);color:#b39ddb;}
+    .talk-text{font-size:0.88rem;color:var(--text);flex:1;}
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: var(--muted);
-      font-size: 0.82rem;
-      border-top: 1px solid var(--border);
-    }
-    footer span { color: var(--accent); }
+    /* CONTACT */
+    #contact{text-align:center;}
+    .contact-links{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;}
+    .contact-link{display:flex;align-items:center;gap:0.55rem;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1.5rem;color:var(--text);text-decoration:none;font-size:0.9rem;transition:border-color 0.2s,transform 0.2s;}
+    .contact-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+    .contact-link i{font-size:1.1rem;}
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 1.2rem; }
-      .nav-links { gap: 1rem; }
-      .about-grid { grid-template-columns: 1fr; }
-      .hero-stats { gap: 1.5rem; }
-    }
+    /* FOOTER */
+    footer{text-align:center;padding:2rem;color:var(--muted);font-size:0.82rem;border-top:1px solid var(--border);}
+    footer span{color:var(--accent);}
 
-    /* ── SCROLL ANIMATION ── */
-    .fade-in {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+    /* SCROLL FADE */
+    .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease;}
+    .fade-in.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:768px){
+      nav{padding:0 1.2rem;}
+      .nav-links{gap:1rem;}
+      .about-grid{grid-template-columns:1fr;}
+      .hero-stats{gap:1.5rem;}
     }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
 
+<!-- FLOATING PARTICLE BACKGROUND -->
+<div id="parallax-bg"></div>
+
 <!-- NAV -->
-<nav>
+<nav id="main-nav">
   <div class="nav-logo">&lt;SKP /&gt;</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -451,33 +210,34 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-badge"><i class="fas fa-atom"></i> Postdoctoral Researcher · Quantum Photonics</div>
-  <h1 class="hero-name">Swaroop Kumar Palai</h1>
-  <p class="hero-title">CEMES &amp; LPCNO — <span>Toulouse, France</span></p>
-  <p class="hero-desc">
-    Experimental physicist at the intersection of quantum sensing, 2D materials, and photonic integration.
-    Probing light–matter interactions at the nanoscale — from spin-dark excitons in atomically thin crystals
-    to single-photon emitters in diamond.
-  </p>
-  <div class="hero-tags">
-    <span class="tag">NV Centers</span>
-    <span class="tag">TMDC Heterostructures</span>
-    <span class="tag">AFM Nanoxerography</span>
-    <span class="tag">Fourier-Plane Imaging</span>
-    <span class="tag">Cryogenic Spectroscopy</span>
-    <span class="tag">k-Space Filtering</span>
-    <span class="tag">Moiré Physics</span>
-    <span class="tag">Single-Photon Emission</span>
-  </div>
-  <div class="hero-btns">
-    <a href="mailto:palaiswaroop@gmail.com" class="btn-primary"><i class="fas fa-envelope"></i> Get In Touch</a>
-    <a href="#publications" class="btn-outline"><i class="fas fa-book-open"></i> View Publications</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">8</div><div class="stat-label">Publications</div></div>
-    <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Years Research</div></div>
-    <div class="stat"><div class="stat-num">7</div><div class="stat-label">Awards & Fellowships</div></div>
-    <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Countries</div></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="hero-inner" id="hero-inner">
+    <div class="hero-badge"><i class="fas fa-atom"></i> Postdoctoral Researcher &middot; Quantum Photonics</div>
+    <h1 class="hero-name">Swaroop Kumar Palai</h1>
+    <p class="hero-title">CEMES &amp; LPCNO &mdash; <span>Toulouse, France</span></p>
+    <p class="hero-desc">Experimental physicist at the intersection of quantum sensing, 2D materials, and photonic integration. Probing light&ndash;matter interactions at the nanoscale &mdash; from spin-dark excitons in atomically thin crystals to single-photon emitters in diamond.</p>
+    <div class="hero-tags">
+      <span class="tag">NV Centers</span>
+      <span class="tag">TMDC Heterostructures</span>
+      <span class="tag">AFM Nanoxerography</span>
+      <span class="tag">Fourier-Plane Imaging</span>
+      <span class="tag">Cryogenic Spectroscopy</span>
+      <span class="tag">k-Space Filtering</span>
+      <span class="tag">Moir&eacute; Physics</span>
+      <span class="tag">Single-Photon Emission</span>
+    </div>
+    <div class="hero-btns">
+      <a href="mailto:palaiswaroop@gmail.com" class="btn-primary"><i class="fas fa-envelope"></i> Get In Touch</a>
+      <a href="#publications" class="btn-outline"><i class="fas fa-book-open"></i> View Publications</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label">Publications</div></div>
+      <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Years Research</div></div>
+      <div class="stat"><div class="stat-num">7</div><div class="stat-label">Awards &amp; Fellowships</div></div>
+      <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Countries</div></div>
+    </div>
   </div>
 </section>
 
@@ -488,24 +248,18 @@
   <div class="divider"></div>
   <div class="about-grid">
     <div class="about-text">
-      <p>I am an experimental researcher working at the frontier of quantum photonics and 2D materials physics.
-      Currently a Postdoctoral Researcher at CEMES &amp; LPCNO (Toulouse), my work spans the full pipeline —
-      from nanofabrication and heterostructure assembly to cryogenic optical spectroscopy and quantum
-      light characterisation.</p>
-      <p>My doctoral research at CNRS-LNCMI and Paul Sabatier University focused on magneto-optical
-      spectroscopy of TMDC heterostructures under extreme magnetic fields up to 70 T, revealing
-      twist-angle-dependent exciton physics and Moiré effects.</p>
-      <p>I am passionate about bridging the gap between fundamental quantum optics and device-level photonic
-      integration — building tomorrow's quantum technologies one photon at a time.</p>
+      <p>I am an experimental researcher working at the frontier of quantum photonics and 2D materials physics. Currently a Postdoctoral Researcher at CEMES &amp; LPCNO (Toulouse), my work spans the full pipeline &mdash; from nanofabrication and heterostructure assembly to cryogenic optical spectroscopy and quantum light characterisation.</p>
+      <p>My doctoral research at CNRS-LNCMI and Paul Sabatier University focused on magneto-optical spectroscopy of TMDC heterostructures under extreme magnetic fields up to 70 T, revealing twist-angle-dependent exciton physics and Moir&eacute; effects.</p>
+      <p>I am passionate about bridging the gap between fundamental quantum optics and device-level photonic integration &mdash; building tomorrow&apos;s quantum technologies one photon at a time.</p>
     </div>
     <div>
       <ul class="info-list">
-        <li><i class="fas fa-map-marker-alt"></i><span class="info-label">Location</span> CEMES &amp; LPCNO, Toulouse, France</li>
-        <li><i class="fas fa-briefcase"></i><span class="info-label">Position</span> Postdoctoral Researcher</li>
-        <li><i class="fas fa-envelope"></i><span class="info-label">Email</span> palaiswaroop@gmail.com</li>
-        <li><i class="fas fa-language"></i><span class="info-label">Languages</span> English (C1), French (A1)</li>
-        <li><i class="fas fa-camera"></i><span class="info-label">Hobbies</span> Photography, Video Editing, Badminton</li>
-        <li><i class="fas fa-graduation-cap"></i><span class="info-label">PhD</span> CNRS-LNCMI / Paul Sabatier Univ.</li>
+        <li><i class="fas fa-map-marker-alt"></i><span class="info-label">Location</span>CEMES &amp; LPCNO, Toulouse, France</li>
+        <li><i class="fas fa-briefcase"></i><span class="info-label">Position</span>Postdoctoral Researcher</li>
+        <li><i class="fas fa-envelope"></i><span class="info-label">Email</span>palaiswaroop@gmail.com</li>
+        <li><i class="fas fa-language"></i><span class="info-label">Languages</span>English (C1), French (A1)</li>
+        <li><i class="fas fa-camera"></i><span class="info-label">Hobbies</span>Photography, Video Editing, Badminton</li>
+        <li><i class="fas fa-graduation-cap"></i><span class="info-label">PhD</span>CNRS-LNCMI / Paul Sabatier Univ.</li>
       </ul>
     </div>
   </div>
@@ -517,83 +271,13 @@
   <h2 class="section-title">Experience &amp; <span>Positions</span></h2>
   <div class="divider"></div>
   <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-header">
-          <div class="tl-role">Postdoctoral Researcher</div>
-          <div class="tl-date">Jan 2025 – Present</div>
-        </div>
-        <div class="tl-org">CEMES &amp; LPCNO, Toulouse, France</div>
-        <div class="tl-desc">Integration of nanodiamonds with NV centers into photonic architectures. Directional emission control, single-photon verification, and k-space Fourier-plane engineering.</div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-header">
-          <div class="tl-role">Doctoral Researcher</div>
-          <div class="tl-date">Sept 2021 – Oct 2024</div>
-        </div>
-        <div class="tl-org">CNRS-LNCMI / Paul Sabatier University Toulouse III</div>
-        <div class="tl-desc">Marie Skłodowska-Curie Fellow. Magneto-optical spectroscopy of 2D TMDC heterostructures up to 70 T. AFM ironing, moiré physics, and ultrafast pump-probe spectroscopy.</div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-header">
-          <div class="tl-role">Research Intern – AFM &amp; Correlation Spectroscopy</div>
-          <div class="tl-date">2024</div>
-        </div>
-        <div class="tl-org">Nenovision s.r.o, Brno, Czech Republic</div>
-        <div class="tl-desc">Modulation of atomic reconstruction in MoS₂/WS₂ via contact-mode AFM. Correlated SEM–AFM imaging with Litescope 2.5 in cleanroom.</div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-header">
-          <div class="tl-role">Research Intern – Ultrafast Spectroscopy</div>
-          <div class="tl-date">2023</div>
-        </div>
-        <div class="tl-org">Politecnico di Milano, Milan, Italy</div>
-        <div class="tl-desc">Pump-probe and transient absorption spectroscopy on WSe₂-BAPI heterostructures. Dexter-like coupling and ultrafast charge transfer dynamics.</div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-header">
-          <div class="tl-role">Research Intern – TMDC Fabrication</div>
-          <div class="tl-date">2022</div>
-        </div>
-        <div class="tl-org">ICMM-CSIC, Madrid, Spain</div>
-        <div class="tl-desc">Exfoliation, stacking, and AFM-ironing post-processing of TMDC heterostructures. Statistical spectral analysis.</div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-header">
-          <div class="tl-role">Junior Research Fellow</div>
-          <div class="tl-date">2020 – 2021</div>
-        </div>
-        <div class="tl-org">IIT Madras, Chennai, India</div>
-        <div class="tl-desc">Flexible quantum light-emitting devices from van der Waals layered materials. CVD furnace optimization and flake characterisation.</div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-header">
-          <div class="tl-role">Research Intern – Nanofabrication</div>
-          <div class="tl-date">2019</div>
-        </div>
-        <div class="tl-org">Seoul National University, Seoul, South Korea</div>
-        <div class="tl-desc">UV-lithography, ALD, dry/wet etching, lift-off for flexible nanogap devices and topology-changing metasurfaces in cleanroom.</div>
-      </div>
-    </div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-header"><div class="tl-role">Postdoctoral Researcher</div><div class="tl-date">Jan 2025 &ndash; Present</div></div><div class="tl-org">CEMES &amp; LPCNO, Toulouse, France</div><div class="tl-desc">Integration of nanodiamonds with NV centers into photonic architectures. Directional emission control, single-photon verification, and k-space Fourier-plane engineering.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-header"><div class="tl-role">Doctoral Researcher</div><div class="tl-date">Sept 2021 &ndash; Oct 2024</div></div><div class="tl-org">CNRS-LNCMI / Paul Sabatier University Toulouse III</div><div class="tl-desc">Marie Sk&#322;odowska-Curie Fellow. Magneto-optical spectroscopy of 2D TMDC heterostructures up to 70 T. AFM ironing, moir&eacute; physics, and ultrafast pump-probe spectroscopy.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-header"><div class="tl-role">Research Intern &ndash; AFM &amp; Correlation Spectroscopy</div><div class="tl-date">2024</div></div><div class="tl-org">Nenovision s.r.o, Brno, Czech Republic</div><div class="tl-desc">Modulation of atomic reconstruction in MoS&#8322;/WS&#8322; via contact-mode AFM. Correlated SEM&ndash;AFM imaging with Litescope 2.5 in cleanroom.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-header"><div class="tl-role">Research Intern &ndash; Ultrafast Spectroscopy</div><div class="tl-date">2023</div></div><div class="tl-org">Politecnico di Milano, Milan, Italy</div><div class="tl-desc">Pump-probe and transient absorption spectroscopy on WSe&#8322;-BAPI heterostructures. Dexter-like coupling and ultrafast charge transfer dynamics.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-header"><div class="tl-role">Research Intern &ndash; TMDC Fabrication</div><div class="tl-date">2022</div></div><div class="tl-org">ICMM-CSIC, Madrid, Spain</div><div class="tl-desc">Exfoliation, stacking, and AFM-ironing of TMDC heterostructures. Statistical spectral analysis.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-header"><div class="tl-role">Junior Research Fellow</div><div class="tl-date">2020 &ndash; 2021</div></div><div class="tl-org">IIT Madras, Chennai, India</div><div class="tl-desc">Flexible quantum light-emitting devices from van der Waals layered materials. CVD furnace optimization and flake characterisation.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-header"><div class="tl-role">Research Intern &ndash; Nanofabrication</div><div class="tl-date">2019</div></div><div class="tl-org">Seoul National University, Seoul, South Korea</div><div class="tl-desc">UV-lithography, ALD, dry/wet etching, lift-off for flexible nanogap devices and topology-changing metasurfaces in cleanroom.</div></div></div>
   </div>
 </section>
 
@@ -607,95 +291,43 @@
     <div class="proj-card">
       <div class="proj-icon"><i class="fas fa-diamond"></i></div>
       <div class="proj-title">NV-Center Quantum Sensing &amp; Dielectric Nanoantenna Integration</div>
-      <div class="proj-desc">AFM Nanoxerography-based deterministic placement of nanodiamonds with NV centers into dielectric nanoantennas and metasurfaces. g²(τ) second-order autocorrelation measurements confirm single-photon purity. Fourier-plane imaging used for far-field emission pattern mapping.</div>
-      <div class="proj-tags">
-        <span class="proj-tag">NV Centers</span>
-        <span class="proj-tag">g²(τ) HBT</span>
-        <span class="proj-tag">AFM Nanoxerography</span>
-        <span class="proj-tag green">Single-Photon Emission</span>
-        <span class="proj-tag purple">Metasurfaces</span>
-      </div>
+      <div class="proj-desc">AFM Nanoxerography-based deterministic placement of nanodiamonds with NV centers into dielectric nanoantennas and metasurfaces. g&#178;(&tau;) second-order autocorrelation measurements confirm single-photon purity. Fourier-plane imaging used for far-field emission pattern mapping.</div>
+      <div class="proj-tags"><span class="proj-tag">NV Centers</span><span class="proj-tag">g&#178;(&tau;) HBT</span><span class="proj-tag">AFM Nanoxerography</span><span class="proj-tag green">Single-Photon Emission</span><span class="proj-tag purple">Metasurfaces</span></div>
     </div>
 
     <div class="proj-card">
       <div class="proj-icon"><i class="fas fa-filter"></i></div>
       <div class="proj-title">k-Space Vector Filtering for Spin-Dark/Bright Exciton Separation in TMDCs</div>
-      <div class="proj-desc">
-        Fourier-plane (back-focal-plane) microscopy combined with engineered spatial frequency filtering
-        using custom amplitude masks and aperture stops (central beam block) to selectively transmit either
-        in-plane (σ±, TE-polarised, <em>bright</em> exciton) or out-of-plane (z-polarised, TM-mode, <em>spin-dark</em>
-        exciton) dipole radiation lobes. By exploiting the angular momentum selection rules in the K/K′ valleys
-        of atomically thin MoS₂, we map the emission anisotropy in reciprocal space, disentangle momentum-dark
-        and spin-dark exciton contributions, and extract valley polarisation degree as a function of in-plane
-        wavevector magnitude |k∥|. Room-temperature observation of spin-dark excitonic emission enabled by
-        high-NA objective (NA &gt; 1.4) and sub-λ aperture engineering.
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag red">k-Space Filtering</span>
-        <span class="proj-tag red">Fourier-Plane Imaging</span>
-        <span class="proj-tag green">Spin-Dark Excitons</span>
-        <span class="proj-tag green">Bright Excitons</span>
-        <span class="proj-tag">MoS₂ Monolayer</span>
-        <span class="proj-tag purple">Valley Polarisation</span>
-        <span class="proj-tag">BFP Microscopy</span>
-        <span class="proj-tag red">Dipole Radiation Pattern</span>
-        <span class="proj-tag purple">Angular Momentum</span>
-        <span class="proj-tag">σ± Selection Rules</span>
-        <span class="proj-tag green">TM/TE Mode Separation</span>
-        <span class="proj-tag">High-NA Objective</span>
-      </div>
+      <div class="proj-desc">Fourier-plane (back-focal-plane) microscopy with engineered spatial frequency masks and central beam-block aperture stops to selectively transmit in-plane (&sigma;&plusmn;, TE, <em>bright</em>) or out-of-plane (z-polarised, TM-mode, <em>spin-dark</em>) dipole emission lobes. Exploiting K/K&prime; valley angular momentum selection rules in atomically thin MoS&#8322; to map emission anisotropy in reciprocal space, disentangle momentum-dark and spin-dark exciton contributions, and extract valley polarisation degree as a function of in-plane wavevector |k&parallel;|. Room-temperature spin-dark excitonic emission enabled by high-NA objective (NA &gt; 1.4) and sub-&lambda; aperture engineering.</div>
+      <div class="proj-tags"><span class="proj-tag red">k-Space Filtering</span><span class="proj-tag red">Fourier-Plane Imaging</span><span class="proj-tag green">Spin-Dark Excitons</span><span class="proj-tag green">Bright Excitons</span><span class="proj-tag">MoS&#8322; Monolayer</span><span class="proj-tag purple">Valley Polarisation</span><span class="proj-tag">BFP Microscopy</span><span class="proj-tag red">Dipole Radiation Pattern</span><span class="proj-tag purple">&sigma;&plusmn; Selection Rules</span><span class="proj-tag green">TM/TE Mode Separation</span><span class="proj-tag">High-NA Objective</span></div>
     </div>
 
     <div class="proj-card">
       <div class="proj-icon"><i class="fas fa-layer-group"></i></div>
       <div class="proj-title">TMDC Heterostructure Fabrication &amp; AFM Ironing</div>
-      <div class="proj-desc">Novel fabrication route for MoSe₂/MoS₂ heterostructures with AFM ironing post-processing to flatten bubbles, improve interface quality, and enhance PL quantum yield. Revealed twist-angle-dependent dehybridization of momentum-indirect interlayer excitons.</div>
-      <div class="proj-tags">
-        <span class="proj-tag">Moiré Superlattice</span>
-        <span class="proj-tag green">AFM Ironing</span>
-        <span class="proj-tag">Interlayer Excitons</span>
-        <span class="proj-tag purple">Momentum-Dark Excitons</span>
-        <span class="proj-tag">Nano Letters</span>
-      </div>
+      <div class="proj-desc">Novel fabrication route for MoSe&#8322;/MoS&#8322; heterostructures with AFM ironing post-processing to flatten bubbles and enhance PL quantum yield. Revealed twist-angle-dependent dehybridization of momentum-indirect interlayer excitons.</div>
+      <div class="proj-tags"><span class="proj-tag">Moir&eacute; Superlattice</span><span class="proj-tag green">AFM Ironing</span><span class="proj-tag">Interlayer Excitons</span><span class="proj-tag purple">Momentum-Dark Excitons</span><span class="proj-tag">Nano Letters</span></div>
     </div>
 
     <div class="proj-card">
       <div class="proj-icon"><i class="fas fa-bolt"></i></div>
       <div class="proj-title">Ultrafast Charge Transfer in Perovskite-TMDC Heterostructures</div>
-      <div class="proj-desc">Polarised pump-probe and transient absorption spectroscopy on WSe₂-BAPI hybrid heterostructures. Demonstrated sub-picosecond charge transfer via Dexter-like coupling and emergence of new excitonic species at the organic-2D interface.</div>
-      <div class="proj-tags">
-        <span class="proj-tag red">Pump-Probe</span>
-        <span class="proj-tag red">Transient Absorption</span>
-        <span class="proj-tag">Dexter Coupling</span>
-        <span class="proj-tag green">WSe₂ Monolayer</span>
-        <span class="proj-tag purple">Perovskite Hybrid</span>
-      </div>
+      <div class="proj-desc">Polarised pump-probe and transient absorption spectroscopy on WSe&#8322;-BAPI hybrid heterostructures. Sub-picosecond charge transfer via Dexter-like coupling and emergence of new excitonic species at the organic-2D interface.</div>
+      <div class="proj-tags"><span class="proj-tag red">Pump-Probe</span><span class="proj-tag red">Transient Absorption</span><span class="proj-tag">Dexter Coupling</span><span class="proj-tag green">WSe&#8322; Monolayer</span><span class="proj-tag purple">Perovskite Hybrid</span></div>
     </div>
 
     <div class="proj-card">
       <div class="proj-icon"><i class="fas fa-magnet"></i></div>
       <div class="proj-title">Magneto-Optical Spectroscopy up to 70 T</div>
-      <div class="proj-desc">Designed and optimised a fibre-based flake probe operating at 2 K and 70 T pulsed magnetic field. RTD calibration, micro-soldering of pickup coils, and polarisation-resolved PL measurements on TMDC flakes.</div>
-      <div class="proj-tags">
-        <span class="proj-tag">70 T Pulsed Field</span>
-        <span class="proj-tag green">Cryogenics (2K)</span>
-        <span class="proj-tag">Fibre Optics</span>
-        <span class="proj-tag purple">RTD Calibration</span>
-        <span class="proj-tag">Valley Zeeman Effect</span>
-      </div>
+      <div class="proj-desc">Fibre-based flake probe operating at 2 K and 70 T pulsed magnetic field. RTD calibration, micro-soldering of pickup coils, and polarisation-resolved PL on TMDC flakes in extreme conditions.</div>
+      <div class="proj-tags"><span class="proj-tag">70 T Pulsed Field</span><span class="proj-tag green">Cryogenics (2K)</span><span class="proj-tag">Fibre Optics</span><span class="proj-tag purple">Valley Zeeman Effect</span></div>
     </div>
 
     <div class="proj-card">
       <div class="proj-icon"><i class="fas fa-microchip"></i></div>
       <div class="proj-title">Flexible Nanogap Fabrication &amp; Metasurfaces</div>
-      <div class="proj-desc">Cleanroom nanofabrication of flexible nanogap devices at Seoul National University using UV-lithography, ALD, and dry/wet etching. Topology-changing metasurfaces for optical wavefront control.</div>
-      <div class="proj-tags">
-        <span class="proj-tag">UV-Lithography</span>
-        <span class="proj-tag green">ALD</span>
-        <span class="proj-tag">Nanoantennas</span>
-        <span class="proj-tag purple">Metasurfaces</span>
-        <span class="proj-tag red">Cleanroom</span>
-      </div>
+      <div class="proj-desc">Cleanroom nanofabrication of flexible nanogap devices using UV-lithography, ALD, and dry/wet etching. Topology-changing metasurfaces for optical wavefront control.</div>
+      <div class="proj-tags"><span class="proj-tag">UV-Lithography</span><span class="proj-tag green">ALD</span><span class="proj-tag">Nanoantennas</span><span class="proj-tag purple">Metasurfaces</span><span class="proj-tag red">Cleanroom</span></div>
     </div>
 
   </div>
@@ -707,71 +339,14 @@
   <h2 class="section-title">Publications &amp; <span>Manuscripts</span></h2>
   <div class="divider"></div>
   <div class="pub-list">
-
-    <div class="pub-item">
-      <div class="pub-num">01</div>
-      <div class="pub-content">
-        <div class="pub-title">Approaching the Intrinsic Properties of Moiré Structures Using AFM Ironing <span class="pub-badge badge-pub">Nano Letters</span></div>
-        <div class="pub-meta">Palai, S. K., Dyksik, M., Sokolowski, N. et al. · 2023</div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-num">02</div>
-      <div class="pub-content">
-        <div class="pub-title">Twist-Angle Dependent Dehybridization of Momentum-Indirect Excitons in MoSe₂/MoS₂ Heterostructures <span class="pub-badge badge-pub">2D Materials</span></div>
-        <div class="pub-meta">Sokołowski, N., Palai, S. et al. · 2023</div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-num">03</div>
-      <div class="pub-content">
-        <div class="pub-title">Control of the Valley Polarization of Monolayer WSe₂ by Dexter-like Coupling <span class="pub-badge badge-pub">2D Materials</span></div>
-        <div class="pub-meta">Jasinski, J., Thompson, J., Palai, S. et al. · 2024</div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-num">04</div>
-      <div class="pub-content">
-        <div class="pub-title">Low-Temperature Disorder and Lattice Dynamics in a Luminescent 1D Hybrid Halide <span class="pub-badge badge-pub">ACS Chem. Mater.</span></div>
-        <div class="pub-meta">Nowok, A., Mączka, M., …, Palai, S., Sieradzki, A. · 2024</div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-num">05</div>
-      <div class="pub-content">
-        <div class="pub-title">Ultrafast Charge Transfer and New Excitonic Species in Perovskite-TMDC Heterostructures <span class="pub-badge badge-sub">Submitted · Nano Letters</span></div>
-        <div class="pub-meta">arXiv: 2510.19447 · 2024</div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-num">06</div>
-      <div class="pub-content">
-        <div class="pub-title">Directional Control of Emission from NV Centers Using Optimised Dielectric Photonic Architectures <span class="pub-badge badge-prep">In Preparation</span></div>
-        <div class="pub-meta">Manuscript under preparation · 2025</div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-num">07</div>
-      <div class="pub-content">
-        <div class="pub-title">Unveiling Room-Temperature Spin-Dark Excitonic Emission in Atomically Thin MoS₂ <span class="pub-badge badge-prep">In Preparation</span></div>
-        <div class="pub-meta">Manuscript under preparation · 2025</div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-num">08</div>
-      <div class="pub-content">
-        <div class="pub-title">Momentum-Dark Exciton Diffusive Transport in Atomically Thin MoS₂ <span class="pub-badge badge-prep">In Preparation</span></div>
-        <div class="pub-meta">Manuscript under preparation · 2025</div>
-      </div>
-    </div>
-
+    <div class="pub-item"><div class="pub-num">01</div><div><div class="pub-title">Approaching the Intrinsic Properties of Moir&eacute; Structures Using AFM Ironing <span class="pub-badge badge-pub">Nano Letters</span></div><div class="pub-meta">Palai, S. K., Dyksik, M., Sokolowski, N. et al. &middot; 2023</div></div></div>
+    <div class="pub-item"><div class="pub-num">02</div><div><div class="pub-title">Twist-Angle Dependent Dehybridization of Momentum-Indirect Excitons in MoSe&#8322;/MoS&#8322; Heterostructures <span class="pub-badge badge-pub">2D Materials</span></div><div class="pub-meta">Sok&#243;&#322;owski, N., Palai, S. et al. &middot; 2023</div></div></div>
+    <div class="pub-item"><div class="pub-num">03</div><div><div class="pub-title">Control of the Valley Polarization of Monolayer WSe&#8322; by Dexter-like Coupling <span class="pub-badge badge-pub">2D Materials</span></div><div class="pub-meta">Jasinski, J., Thompson, J., Palai, S. et al. &middot; 2024</div></div></div>
+    <div class="pub-item"><div class="pub-num">04</div><div><div class="pub-title">Low-Temperature Disorder and Lattice Dynamics in a Luminescent 1D Hybrid Halide <span class="pub-badge badge-pub">ACS Chem. Mater.</span></div><div class="pub-meta">Nowok, A., Mączka, M., &hellip;, Palai, S., Sieradzki, A. &middot; 2024</div></div></div>
+    <div class="pub-item"><div class="pub-num">05</div><div><div class="pub-title">Ultrafast Charge Transfer and New Excitonic Species in Perovskite-TMDC Heterostructures <span class="pub-badge badge-sub">Submitted &middot; Nano Letters</span></div><div class="pub-meta">arXiv: 2510.19447 &middot; 2024</div></div></div>
+    <div class="pub-item"><div class="pub-num">06</div><div><div class="pub-title">Directional Control of Emission from NV Centers Using Optimised Dielectric Photonic Architectures <span class="pub-badge badge-prep">In Preparation</span></div><div class="pub-meta">Manuscript under preparation &middot; 2025</div></div></div>
+    <div class="pub-item"><div class="pub-num">07</div><div><div class="pub-title">Unveiling Room-Temperature Spin-Dark Excitonic Emission in Atomically Thin MoS&#8322; <span class="pub-badge badge-prep">In Preparation</span></div><div class="pub-meta">Manuscript under preparation &middot; 2025</div></div></div>
+    <div class="pub-item"><div class="pub-num">08</div><div><div class="pub-title">Momentum-Dark Exciton Diffusive Transport in Atomically Thin MoS&#8322; <span class="pub-badge badge-prep">In Preparation</span></div><div class="pub-meta">Manuscript under preparation &middot; 2025</div></div></div>
   </div>
 </section>
 
@@ -781,55 +356,10 @@
   <h2 class="section-title">Skills &amp; <span>Expertise</span></h2>
   <div class="divider"></div>
   <div class="skills-grid">
-    <div class="skill-card">
-      <h4><i class="fas fa-microscope"></i> &nbsp;Experimental</h4>
-      <div class="skill-pills">
-        <span class="pill">Optical Characterisation</span>
-        <span class="pill">Micro-PL Spectroscopy</span>
-        <span class="pill">Fourier-Plane Imaging</span>
-        <span class="pill">Cryogenics (4K/2K)</span>
-        <span class="pill">AFM</span>
-        <span class="pill">SEM</span>
-        <span class="pill">COMSOL</span>
-        <span class="pill">Non-linear Spectroscopy</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <h4><i class="fas fa-tools"></i> &nbsp;Fabrication</h4>
-      <div class="skill-pills">
-        <span class="pill">Nanofabrication</span>
-        <span class="pill">UV-Lithography</span>
-        <span class="pill">ALD</span>
-        <span class="pill">Dry/Wet Etching</span>
-        <span class="pill">Cleanroom</span>
-        <span class="pill">AFM Nanoxerography</span>
-        <span class="pill">TMDC Exfoliation</span>
-        <span class="pill">CVD</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <h4><i class="fas fa-code"></i> &nbsp;Computing</h4>
-      <div class="skill-pills">
-        <span class="pill">Python</span>
-        <span class="pill">numpy / pandas</span>
-        <span class="pill">matplotlib</span>
-        <span class="pill">Seaborn</span>
-        <span class="pill">C / C++</span>
-        <span class="pill">Fortran</span>
-        <span class="pill">LaTeX</span>
-        <span class="pill">OriginLabs</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <h4><i class="fas fa-users"></i> &nbsp;Leadership</h4>
-      <div class="skill-pills">
-        <span class="pill">Student Mentoring</span>
-        <span class="pill">Setup Training</span>
-        <span class="pill">Team Organisation</span>
-        <span class="pill">Grant Writing</span>
-        <span class="pill">Scientific Communication</span>
-      </div>
-    </div>
+    <div class="skill-card"><h4><i class="fas fa-microscope"></i> &nbsp;Experimental</h4><div class="skill-pills"><span class="pill">Optical Characterisation</span><span class="pill">Micro-PL Spectroscopy</span><span class="pill">Fourier-Plane Imaging</span><span class="pill">Cryogenics (4K/2K)</span><span class="pill">AFM</span><span class="pill">SEM</span><span class="pill">COMSOL</span><span class="pill">Non-linear Spectroscopy</span></div></div>
+    <div class="skill-card"><h4><i class="fas fa-tools"></i> &nbsp;Fabrication</h4><div class="skill-pills"><span class="pill">Nanofabrication</span><span class="pill">UV-Lithography</span><span class="pill">ALD</span><span class="pill">Dry/Wet Etching</span><span class="pill">Cleanroom</span><span class="pill">AFM Nanoxerography</span><span class="pill">TMDC Exfoliation</span><span class="pill">CVD</span></div></div>
+    <div class="skill-card"><h4><i class="fas fa-code"></i> &nbsp;Computing</h4><div class="skill-pills"><span class="pill">Python</span><span class="pill">numpy / pandas</span><span class="pill">matplotlib</span><span class="pill">Seaborn</span><span class="pill">C / C++</span><span class="pill">Fortran</span><span class="pill">LaTeX</span><span class="pill">OriginLabs</span></div></div>
+    <div class="skill-card"><h4><i class="fas fa-users"></i> &nbsp;Leadership</h4><div class="skill-pills"><span class="pill">Student Mentoring</span><span class="pill">Setup Training</span><span class="pill">Team Organisation</span><span class="pill">Grant Writing</span><span class="pill">Scientific Communication</span></div></div>
   </div>
 </section>
 
@@ -839,13 +369,13 @@
   <h2 class="section-title">Awards &amp; <span>Fellowships</span></h2>
   <div class="divider"></div>
   <div class="awards-grid">
-    <div class="award-item"><div class="award-icon"><i class="fas fa-star"></i></div><div class="award-text">Marie Skłodowska-Curie Actions (MSCA) Early Stage Researcher Fellowship</div></div>
+    <div class="award-item"><div class="award-icon"><i class="fas fa-star"></i></div><div class="award-text">Marie Sk&#322;odowska-Curie Actions (MSCA) Early Stage Researcher Fellowship</div></div>
     <div class="award-item"><div class="award-icon"><i class="fas fa-trophy"></i></div><div class="award-text">NanoX Postdoc Fellowship, Toulouse</div></div>
-    <div class="award-item"><div class="award-icon"><i class="fas fa-award"></i></div><div class="award-text">EMFL Proposal Grant – European Magnetic Field Laboratory</div></div>
+    <div class="award-item"><div class="award-icon"><i class="fas fa-award"></i></div><div class="award-text">EMFL Proposal Grant &ndash; European Magnetic Field Laboratory</div></div>
     <div class="award-item"><div class="award-icon"><i class="fas fa-award"></i></div><div class="award-text">Laserlab Europe Grant 2023</div></div>
-    <div class="award-item"><div class="award-icon"><i class="fas fa-medal"></i></div><div class="award-text">Junior Research Fellowship – IIT Madras, India</div></div>
+    <div class="award-item"><div class="award-icon"><i class="fas fa-medal"></i></div><div class="award-text">Junior Research Fellowship &ndash; IIT Madras, India</div></div>
     <div class="award-item"><div class="award-icon"><i class="fas fa-check-circle"></i></div><div class="award-text">GATE 2018 Qualified</div></div>
-    <div class="award-item"><div class="award-icon"><i class="fas fa-medal"></i></div><div class="award-text">Gold Medalist – National Science Olympiad</div></div>
+    <div class="award-item"><div class="award-icon"><i class="fas fa-medal"></i></div><div class="award-text">Gold Medalist &ndash; National Science Olympiad</div></div>
   </div>
 </section>
 
@@ -855,14 +385,14 @@
   <h2 class="section-title">Scientific <span>Communication</span></h2>
   <div class="divider"></div>
   <div class="talks-list">
-    <div class="talk-item"><div class="talk-type invited">Invited</div><div class="talk-text">META 2025 – Malaga, Spain</div></div>
-    <div class="talk-item"><div class="talk-type invited">Invited</div><div class="talk-text">AES 2025 – Tanger, Morocco</div></div>
-    <div class="talk-item"><div class="talk-type invited">Invited</div><div class="talk-text">CNRS-LNCMI Grenoble &amp; Toulouse – June 2023</div></div>
-    <div class="talk-item"><div class="talk-type talk">Talk</div><div class="talk-text">Flatlands 2023: Beyond Graphene – Prague, Czech Republic</div></div>
-    <div class="talk-item"><div class="talk-type talk">Flash Talk</div><div class="talk-text">Flatlands 2022: Beyond Graphene – Lanzarote, Canary Islands</div></div>
-    <div class="talk-item"><div class="talk-type poster">Poster</div><div class="talk-text">EMFL Days – Kerkerde, Netherlands</div></div>
-    <div class="talk-item"><div class="talk-type poster">Poster</div><div class="talk-text">EPFL – Lausanne, Switzerland</div></div>
-    <div class="talk-item"><div class="talk-type poster">Poster</div><div class="talk-text">CSIC-ICMM – Madrid, Spain</div></div>
+    <div class="talk-item"><div class="talk-type invited">Invited</div><div class="talk-text">META 2025 &ndash; Malaga, Spain</div></div>
+    <div class="talk-item"><div class="talk-type invited">Invited</div><div class="talk-text">AES 2025 &ndash; Tanger, Morocco</div></div>
+    <div class="talk-item"><div class="talk-type invited">Invited</div><div class="talk-text">CNRS-LNCMI Grenoble &amp; Toulouse &ndash; June 2023</div></div>
+    <div class="talk-item"><div class="talk-type talk">Talk</div><div class="talk-text">Flatlands 2023: Beyond Graphene &ndash; Prague, Czech Republic</div></div>
+    <div class="talk-item"><div class="talk-type talk">Flash Talk</div><div class="talk-text">Flatlands 2022: Beyond Graphene &ndash; Lanzarote, Canary Islands</div></div>
+    <div class="talk-item"><div class="talk-type poster">Poster</div><div class="talk-text">EMFL Days &ndash; Kerkerde, Netherlands</div></div>
+    <div class="talk-item"><div class="talk-type poster">Poster</div><div class="talk-text">EPFL &ndash; Lausanne, Switzerland</div></div>
+    <div class="talk-item"><div class="talk-type poster">Poster</div><div class="talk-text">CSIC-ICMM &ndash; Madrid, Spain</div></div>
   </div>
 </section>
 
@@ -870,11 +400,8 @@
 <section id="contact" class="fade-in">
   <div class="section-label">// connect</div>
   <h2 class="section-title">Get In <span>Touch</span></h2>
-  <div class="divider" style="margin: 0 auto 2rem;"></div>
-  <p style="color:var(--muted); max-width:520px; margin:0 auto 1rem; font-size:0.97rem;">
-    Open to collaborations, visiting positions, and scientific discussions on quantum photonics,
-    2D materials, or nanofabrication. Feel free to reach out!
-  </p>
+  <div class="divider" style="margin:0 auto 2rem;"></div>
+  <p style="color:var(--muted);max-width:520px;margin:0 auto 1rem;font-size:0.97rem;">Open to collaborations, visiting positions, and scientific discussions on quantum photonics, 2D materials, or nanofabrication. Feel free to reach out!</p>
   <div class="contact-links">
     <a href="mailto:palaiswaroop@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> palaiswaroop@gmail.com</a>
     <a href="https://www.linkedin.com" class="contact-link" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
@@ -882,31 +409,69 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>Designed &amp; built with ❤️ &nbsp;·&nbsp; <span>Swaroop Kumar Palai</span> &nbsp;·&nbsp; Toulouse, France &nbsp;·&nbsp; 2025</p>
-  <p style="margin-top:0.5rem; font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#3d4f6b;">
-    &lt;quantum/&gt; &lt;photons/&gt; &lt;2D-materials/&gt;
-  </p>
+  <p>Designed &amp; built with &hearts; &nbsp;&middot;&nbsp; <span>Swaroop Kumar Palai</span> &nbsp;&middot;&nbsp; Toulouse, France &nbsp;&middot;&nbsp; 2025</p>
+  <p style="margin-top:0.5rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#3d4f6b;">&lt;quantum/&gt; &lt;photons/&gt; &lt;2D-materials/&gt;</p>
 </footer>
 
 <script>
-  // Intersection Observer for fade-in sections
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  // ── FLOATING PARTICLES ──
+  const bg = document.getElementById('parallax-bg');
+  const colors = ['rgba(79,156,249,','rgba(56,217,169,','rgba(123,94,167,'];
+  for(let i=0;i<32;i++){
+    const dot=document.createElement('div');
+    dot.className='p-dot';
+    const size=Math.random()*3+1;
+    const color=colors[Math.floor(Math.random()*colors.length)];
+    const dur=Math.random()*20+12;
+    const delay=Math.random()*25;
+    dot.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100+100}%;background:${color}${(Math.random()*0.5+0.3).toFixed(2)});animation-duration:${dur}s;animation-delay:-${delay}s;`;
+    bg.appendChild(dot);
+  }
 
-  // Active nav highlighting
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+  // ── HERO ORB PARALLAX ON MOUSE MOVE ──
+  const orbs=document.querySelectorAll('.orb');
+  document.addEventListener('mousemove',(e)=>{
+    const cx=window.innerWidth/2, cy=window.innerHeight/2;
+    const dx=(e.clientX-cx)/cx, dy=(e.clientY-cy)/cy;
+    orbs.forEach((orb,i)=>{
+      const d=(i+1)*16;
+      orb.style.transform=`translate(${dx*d}px,${dy*d}px)`;
     });
   });
+
+  // ── HERO SCROLL PARALLAX ──
+  const heroInner=document.getElementById('hero-inner');
+  window.addEventListener('scroll',()=>{
+    const sy=window.scrollY;
+    // Hero content drifts up, fades out
+    if(heroInner){
+      heroInner.style.transform=`translateY(${sy*0.22}px)`;
+      heroInner.style.opacity=Math.max(0,1-sy/420);
+    }
+    // Orbs move at different speeds
+    orbs.forEach((orb,i)=>{
+      const speed=0.06+i*0.05;
+      orb.style.transform=`translateY(${sy*speed}px)`;
+    });
+    // Nav tint
+    document.getElementById('main-nav').classList.toggle('scrolled',sy>40);
+  },{passive:true});
+
+  // ── SCROLL FADE-IN SECTIONS ──
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+  },{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+  // ── ACTIVE NAV HIGHLIGHT ──
+  const sections=document.querySelectorAll('section[id]');
+  const navLinks=document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll',()=>{
+    let current='';
+    sections.forEach(s=>{if(window.scrollY>=s.offsetTop-110)current=s.id;});
+    navLinks.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+current?'var(--accent)':'';});
+  },{passive:true});
 </script>
 </body>
 </html>
